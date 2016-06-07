@@ -20,7 +20,6 @@ print("adapter=", adapter)
 #  device, # of byte to capture per packet, promiscuous mode, timeout (ms)
 #cap = pcapy.open_live("eth0", 65536 , 1 , 0)
 cap = pcapy.open_live(adapter, 65536 , 1 , 0)
-sleep(1)
 
 #z = ("cc", "3d", "82", "08", "8e", "dc") 
 macs = []
@@ -34,7 +33,6 @@ while True:
         (header, payload) = cap.next()
     except:
         (header, payload) = (None, None)
-        sleep(1)
 
     if payload and len(payload) > 0:
         ipheader   = unpack("!BBHHHBBH4s4s", payload[14:34])
@@ -56,10 +54,12 @@ while True:
             host = ""
             try:
                 host = gethostbyaddr(y)
+                if type(host) == tuple:
+                    host = host[0]
             except:
                 host = "unknown"
             ips.append(y)
-            print y, host
+            print y, host, protocol
 #       if z == x:
 #           print "YAY1"
 #           exit(0)
