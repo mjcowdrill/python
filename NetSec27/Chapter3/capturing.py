@@ -3,6 +3,7 @@
 import pcapy
 import sys
 from pprint import pprint as pp
+from struct import pack, unpack
 
 devs = pcapy.findalldevs()
 print(devs)
@@ -19,16 +20,20 @@ while True:
     #sys.stdout.write(".")
     (header, payload) = cap.next()
     if payload and len(payload) > 0:
+        ipheader   = unpack("!BBHHHBBH4s4s", payload[14:34])
+        timetolive = ipheader[5]
+        protocol   = ipheader[6]
+
         a1 = payload[:6]
         a2 = payload[6:12]
         y  = ".".join([ "%.2x" % ord(x) for x in a1 ])
         if y not in z:
             z.append(y)
-            print y
+            print y, timetolive, protocol
         y  = ".".join([ "%.2x" % ord(x) for x in a1 ])
         if y not in z:
             z.append(y)
-            print y
+            print y, timetolive, protocol
 #       if z == x:
 #           print "YAY1"
 #           exit(0)
