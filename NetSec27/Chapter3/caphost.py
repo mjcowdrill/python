@@ -37,10 +37,11 @@ def get_host(x):
 devs = pcapy.findalldevs()
 print(devs)
 
-if "wlan0" in devs:
-    adapter="wlan0"
-else:
-    adapter="eth0"
+seek = ("eth1", "eth0", "wlan0")
+for x in seek:
+    if x in devs:
+        adapter=x
+        break
 
 print("adapter=", adapter)
 
@@ -79,5 +80,5 @@ while True:
                 hosts.append(destination)
 
             if source or destination:
-               print("{} {} <=> {}".format(protocol, source, destination))
+               print("{:3d} {:20s} <=> {:20s}".format(protocol, source, destination))
 
