@@ -32,6 +32,7 @@ while True:
     try:
         (header, payload) = cap.next()
     except:
+        sleep(0.25)
         (header, payload) = (None, None)
 
     if payload and len(payload) > 0:
@@ -57,9 +58,9 @@ while True:
                 if type(host) == tuple:
                     host = host[0]
             except:
-                host = "unknown"
+                host = y
             ips.append(y)
-            print y, host, protocol
+            print host, protocol
 #       if z == x:
 #           print "YAY1"
 #           exit(0)
