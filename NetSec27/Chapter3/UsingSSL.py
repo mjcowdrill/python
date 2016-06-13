@@ -16,7 +16,10 @@ except:
     print("error")
 
 try:
-    ssock.write(b"GET / HTTP/1.1 \r\n")
+    #ssock.write(b"GET / HTTP/1.1 \r\n")
+    ssock.write(b"GET / HTTP/1.1 \n")
+
+    #ssock.write(b"Host: www.google.com\n\n")
     ssock.write(b"Host: www.google.com\n\n")
 except Exception as e:
     print("write error: ", e)

@@ -11,8 +11,18 @@ from email.mime.text import MIMEText
 #  rcpt to:  me@me.com
 #  data
 
-s = smtplib.SMTP("172.30.42.127", 25)
-#s.login("user", "password")
+# server = "172.30.42.127"
+# port   = 25
+# from   = "ricmessier@gmail.com"
+# to     = "ric@cloudroy.com"
+
+server = "smtp.gmail.com"
+port   = 465
+fr     = "mark.cowdrill@google.com"
+to     = "mark.cowdrill@google.com"
+
+s = smtplib.SMTP(server, port)
+s.login("mark.cowdrill", "")
 
 try:
 #  could use the following for a MIME message
@@ -24,7 +34,7 @@ try:
 #    m['Subject'] = "This is a message to you"
 
     m = "\nThis is a message from the last session"
-    s.sendmail("ricmessier@gmail.com", "ric@cloudroy.com", m)
+    s.sendmail(fr, to, m)
     #  send the MIME message
     # s.send_message(m)
     print("Finished sending message")
